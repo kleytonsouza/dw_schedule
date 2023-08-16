@@ -1,3 +1,4 @@
+import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -28,10 +29,52 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset('images/imgLogo.png'),
+                        const SizedBox(
+                          height: 26,
+                        ),
                         TextFormField(
                           decoration: const InputDecoration(
-                            label: Text('Email'),
+                            label: Text('Login'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            hintText: 'E-mail',
+                            hintStyle: TextStyle(color: Colors.black),
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
+                        ),
+                        const SizedBox(
+                          height: 26,
+                        ),
+                        TextFormField(
+                          decoration: const InputDecoration(
+                            label: Text('Senha'),
+                            labelStyle: TextStyle(color: Colors.black),
+                            hintText: 'Senha',
+                            hintStyle: TextStyle(color: Colors.black),
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Esqueceu Senha?',
+                            style: TextStyle(
+                              color: ColorsConstants.lightBlue,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 26,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size.fromHeight(56),
+                          ),
+                          onPressed: () {},
+                          child: const Text('ACESSO'),
                         ),
                       ],
                     ),
