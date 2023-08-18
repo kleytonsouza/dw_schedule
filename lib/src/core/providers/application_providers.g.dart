@@ -50,5 +50,50 @@ final userLoginServiceProvider = Provider<UserLoginService>.internal(
 );
 
 typedef UserLoginServiceRef = ProviderRef<UserLoginService>;
+String _$getMeHash() => r'835de91f459d1216fe7813de1ce4ffa8c28975d4';
+
+/// See also [getMe].
+@ProviderFor(getMe)
+final getMeProvider = FutureProvider<UserModel>.internal(
+  getMe,
+  name: r'getMeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$getMeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetMeRef = FutureProviderRef<UserModel>;
+String _$scheduleRepositoryHash() =>
+    r'6d6cdffa7d9ac05436b674edc1a5e04d9aa01c27';
+
+/// See also [scheduleRepository].
+@ProviderFor(scheduleRepository)
+final scheduleRepositoryProvider = Provider<ScheduleRepository>.internal(
+  scheduleRepository,
+  name: r'scheduleRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$scheduleRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef ScheduleRepositoryRef = ProviderRef<ScheduleRepository>;
+String _$getMyScheduleHash() => r'581fcf76f2d9555b052c162c4d59bb4bdf85371c';
+
+/// See also [getMySchedule].
+@ProviderFor(getMySchedule)
+final getMyScheduleProvider = FutureProvider<ScheduleModel>.internal(
+  getMySchedule,
+  name: r'getMyScheduleProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getMyScheduleHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetMyScheduleRef = FutureProviderRef<ScheduleModel>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
