@@ -1,3 +1,4 @@
+import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:dw_schedule/src/features/auth/login/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -29,12 +30,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              'images/background_image_chair.jpg',
+              ImageConstants.backgroundImage,
             ),
             opacity: 0.2,
             fit: BoxFit.cover,
@@ -53,7 +54,7 @@ class _SplashPageState extends State<SplashPage> {
                   animation,
                   secondaryAnimation,
                 ) {
-                  return LoginPage();
+                  return const LoginPage();
                 },
                 transitionsBuilder: (_, animation, __, child) {
                   return FadeTransition(
@@ -72,7 +73,7 @@ class _SplashPageState extends State<SplashPage> {
               height: _logoAnimationHeight,
               curve: Curves.linearToEaseOut,
               child: Image.asset(
-                'images/imgLogo.png',
+                ImageConstants.imageLogo,
                 fit: BoxFit.cover,
               ),
             ),

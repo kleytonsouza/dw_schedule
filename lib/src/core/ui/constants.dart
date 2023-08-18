@@ -11,3 +11,9 @@ sealed class ColorsConstants {
 sealed class FontConstants {
   static const fontFamily = 'Poppins';
 }
+
+sealed class ImageConstants {
+  static const backgroundImage = 'images/background_image.jpg';
+  static const imageLogo = 'images/imageLogo.png';
+  static const avatar = 'images/avatar.png';
+}
