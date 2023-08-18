@@ -1,3 +1,4 @@
+import 'package:asyncstate/asyncstate.dart';
 import 'package:dw_schedule/src/core/exceptions/service_exception.dart';
 import 'package:dw_schedule/src/core/fb/either.dart';
 import 'package:dw_schedule/src/core/providers/application_providers.dart';
@@ -13,6 +14,8 @@ class LoginVm extends _$LoginVm {
   LoginState build() => LoginState.initial();
 
   Future<void> login(String email, String password) async {
+    final loaderHandler = AsyncLoaderHandler()..start();
+
     final loginService = ref.watch(userLoginServiceProvider);
 
     final result = await loginService.execute(email, password);
@@ -25,7 +28,7 @@ class LoginVm extends _$LoginVm {
           status: LoginStateStatus.error,
           errorMessage: () => message,
         );
-        break;
     }
+    loaderHandler.close();
   }
 }

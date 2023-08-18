@@ -1,5 +1,7 @@
 import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:dw_schedule/src/core/ui/helpers/form_helper.dart';
+import 'package:dw_schedule/src/core/ui/helpers/messages.dart';
+import 'package:dw_schedule/src/features/auth/login/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:validatorless/validatorless.dart';
@@ -27,7 +29,23 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final loginVm = ref.watch(loginVmProvider.notifier);
+    final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
+
+    ref.listen(loginVmProvider, (_, state) {
+      switch(state){
+        case LoginState(status: LoginStateStatus.initial):
+          break;
+        case LoginState(status: LoginStateStatus.error, :final errorMessage?):
+          Messages.showError(errorMessage, context);
+        case LoginState(status: LoginStateStatus.error):
+          Messages.showError("Erro ao realizar login", context);
+        case LoginState(status: LoginStateStatus.admLogin):
+          break;
+        case LoginState(status: LoginStateStatus.employeeLogin):
+          break;
+      }
+    });
+
     return Scaffold(
       backgroundColor: Colors.blue[100],
       body: Form(
@@ -113,7 +131,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size.fromHeight(56),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              switch (formKey.currentState?.validate()) {
+                                case (false || null):
+                                  Messages.showError(
+                                      'Campos Inválidos', context);
+                                case true:
+                                  login(emailEC.text, passwordEC.text);
+                              }
+                            },
                             child: const Text('ACESSO'),
                           ),
                         ],
