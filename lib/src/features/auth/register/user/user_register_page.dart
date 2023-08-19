@@ -19,6 +19,7 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
   final emailEC = TextEditingController();
   final passwordEC = TextEditingController();
 
+  @override
   void dispose() {
     nameEC.dispose();
     emailEC.dispose();
