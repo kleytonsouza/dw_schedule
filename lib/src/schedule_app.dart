@@ -1,7 +1,9 @@
 import 'package:asyncstate/widget/async_state_builder.dart';
+import 'package:dw_schedule/src/core/ui/schedule_nav_global_key.dart';
 import 'package:dw_schedule/src/core/ui/schedule_theme.dart';
 import 'package:dw_schedule/src/core/ui/widgets/schedule_loader.dart';
 import 'package:dw_schedule/src/features/auth/login/login_page.dart';
+import 'package:dw_schedule/src/features/auth/register/user/user_register_page.dart';
 import 'package:dw_schedule/src/features/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,12 +18,17 @@ class ScheduleApp extends StatelessWidget {
         return MaterialApp(
           title: "events ufpr",
           theme: ScheduleTheme.themeData,
+          navigatorKey: ScheduleNavGlobalKey.instance.navKey,
           navigatorObservers: [asyncNavigatorObserver],
           routes: {
             '/': (_) => const SplashPage(),
             '/auth/login': (_) => const LoginPage(),
-            '/auth/adm': (_) => const Text("ADM"),
-            '/auth/employee': (_) => const Text("Employee"),
+            '/auth/register/user': (_) => const UserRegisterPage(),
+            '/home/register/schedule': (_) => const Center(
+                  child: Text("schedule page"),
+                ),
+            '/home/adm': (_) => const Text("ADM"),
+            '/home/employee': (_) => const Text("Employee"),
           },
         );
       },

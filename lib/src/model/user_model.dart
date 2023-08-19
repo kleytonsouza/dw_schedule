@@ -22,7 +22,7 @@ sealed class UserModel {
 
 class UserModelADM extends UserModel {
   final List<String>? workDays;
-  final List<String>? workHours;
+  final List<int>? workHours;
 
   UserModelADM({
     required super.id,
