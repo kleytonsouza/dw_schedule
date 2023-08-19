@@ -26,7 +26,7 @@ class UserLoginServiceImpl implements UserLoginService {
       case Failure(:final exception):
         return switch (exception) {
           AuthError() =>
-            Failure(ServiceException(message: 'Erro ao realizar login')),
+            Failure(ServiceException(message: 'Erro ao realizar login 1')),
           AuthUnauthorizedException() =>
             Failure(ServiceException(message: 'Login ou senha inválidos'))
         };

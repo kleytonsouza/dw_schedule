@@ -8,7 +8,7 @@ class AuthInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     final RequestOptions(:headers, :extra) = options;
 
-    const authHeaderKey = 'Authorizarion';
+    const authHeaderKey = 'Authorization';
     headers.remove(authHeaderKey);
 
     if (extra case {'DIO_AUTH_KEY': true}) {
@@ -17,7 +17,7 @@ class AuthInterceptor extends Interceptor {
         authHeaderKey: 'Bearer ${sp.getString(LocalStorageKeys.accessToken)}'
       });
     }
-    
+
     handler.next(options);
   }
 }

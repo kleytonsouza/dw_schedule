@@ -15,16 +15,20 @@ part 'application_providers.g.dart';
 @Riverpod(keepAlive: true)
 RestClient restClient(RestClientRef ref) => RestClient();
 
+
 @Riverpod(keepAlive: true)
 UserRepository userRepository(UserRepositoryRef ref) =>
     UserRepositoryImpl(restClient: ref.read(restClientProvider));
+
 
 @Riverpod(keepAlive: true)
 UserLoginService userLoginService(UserLoginServiceRef ref) =>
     UserLoginServiceImpl(userRepository: ref.read(userRepositoryProvider));
 
+ 
 @Riverpod(keepAlive: true)
 Future<UserModel> getMe(GetMeRef ref) async {
+  
   final result = await ref.watch(userRepositoryProvider).me();
 
   return switch (result) {
@@ -33,13 +37,16 @@ Future<UserModel> getMe(GetMeRef ref) async {
   };
 }
 
+
 @Riverpod(keepAlive: true)
 ScheduleRepository scheduleRepository(ScheduleRepositoryRef ref) =>
     ScheduleRepositoryImpl(restClient: ref.watch(restClientProvider));
 
+
 @Riverpod(keepAlive: true)
 Future<ScheduleModel> getMySchedule(GetMyScheduleRef ref) async {
   final userModel = await ref.watch(getMeProvider.future);
+  
   final scheduleRepository = ref.watch(scheduleRepositoryProvider);
   final result = await scheduleRepository.getMySchedule(userModel);
 

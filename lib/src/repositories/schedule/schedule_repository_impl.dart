@@ -14,7 +14,9 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   @override
   Future<Either<RepositoryException, ScheduleModel>> getMySchedule(
       UserModel userModel) async {
+    
     switch (userModel) {
+      
       case UserModelADM():
         final Response(data: List(first: data)) = await restClient.auth.get(
           '/schedule',
@@ -24,7 +26,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
       
       case UserModelEmployee():
         final Response(:data) = await restClient.auth.get(
-          '/barbershop/${userModel.localEventId}',
+          '/schedule/${userModel.localEventId}',
         );
         return Success(ScheduleModel.fromMap(data));
     }

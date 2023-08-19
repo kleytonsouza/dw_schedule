@@ -38,7 +38,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         case LoginState(status: LoginStateStatus.error, :final errorMessage?):
           Messages.showError(errorMessage, context);
         case LoginState(status: LoginStateStatus.error):
-          Messages.showError("Erro ao realizar login", context);
+          Messages.showError("Erro ao realizar login 3", context);
         case LoginState(status: LoginStateStatus.admLogin):
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home/adm', (route) => false);

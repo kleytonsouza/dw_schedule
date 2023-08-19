@@ -34,18 +34,20 @@ class UserRepositoryImpl implements UserRepository {
         }
       }
       log('Erro ao realizar login', error: e, stackTrace: s);
-      return Failure(AuthError(message: 'Erro ao realizar login'));
+      return Failure(AuthError(message: 'Erro ao realizar login 2'));
     }
   }
 
   @override
   Future<Either<RepositoryException, UserModel>> me() async {
-    try {
-      final Response(:data) = await restClient.auth.get('/me');
 
-      return Success(UserModel.fromMap(data));
+    try {
+      
+      final data = await restClient.auth.get('/me');
+
+      return Success(UserModel.fromMap(data.data));
     } on DioException catch (e, s) {
-      log("Erro ao buscar usuário", error: e, stackTrace: s);
+      log("Erro ao buscar usuário 1", error: e, stackTrace: s);
       return Failure(RepositoryException(message: "Erro ao buscar usuário"));
     } on ArgumentError catch (e, s) {
       log("Invalid Json", error: e, stackTrace: s);

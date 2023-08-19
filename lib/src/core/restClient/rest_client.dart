@@ -6,7 +6,8 @@ final class RestClient extends DioForNative {
   RestClient()
       : super(
           BaseOptions(
-            baseUrl: 'http://192.168.0.3:8080',
+            //adb reverse tcp:8000 tcp:8000
+            baseUrl: 'http://localhost:8080',
             connectTimeout: const Duration(seconds: 10),
             receiveTimeout: const Duration(seconds: 60),
           ),

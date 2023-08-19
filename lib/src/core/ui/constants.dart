@@ -13,7 +13,7 @@ sealed class FontConstants {
 }
 
 sealed class ImageConstants {
-  static const backgroundImage = 'images/background_image.jpg';
-  static const imageLogo = 'images/imageLogo.png';
-  static const avatar = 'images/avatar.png';
+  static const backgroundImage = 'assets/images/background_image.jpg';
+  static const imageLogo = 'assets/images/imageLogo.png';
+  static const avatar = 'assets/images/avatar.png';
 }

@@ -23,21 +23,26 @@ class LoginVm extends _$LoginVm {
 
     switch (result) {
       case Success():
+
         ref.invalidate(getMeProvider);
         ref.invalidate(getMyScheduleProvider);
+
         final userModel = await ref.read(getMeProvider.future);
+
         switch (userModel) {
-          case (UserModelADM()):
+          case UserModelADM():
             state = state.copyWith(status: LoginStateStatus.admLogin);
-          case (UserModelEmployee()):
+          case UserModelEmployee():
             state = state.copyWith(status: LoginStateStatus.employeeLogin);
         }
+
       case Failure(exception: ServiceException(:final message)):
         state = state.copyWith(
           status: LoginStateStatus.error,
           errorMessage: () => message,
         );
     }
+    
     loaderHandler.close();
   }
 }
