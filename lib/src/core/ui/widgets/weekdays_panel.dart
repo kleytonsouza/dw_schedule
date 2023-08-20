@@ -62,6 +62,7 @@ class _ButtonDayState extends State<ButtonDay> {
 
   @override
   Widget build(BuildContext context) {
+    
     final textColor = selected ? Colors.white : ColorsConstants.grey;
     var buttonColor = selected ? ColorsConstants.lightBlue : Colors.white;
     final buttonBorderColor =
@@ -89,7 +90,7 @@ class _ButtonDayState extends State<ButtonDay> {
           ),
           child: Center(
               child: Text(
-            'Seg',
+            widget.label,
             style: TextStyle(
               fontSize: 12,
               color: textColor,

@@ -81,9 +81,11 @@ class _ScheduleRegisterPageState extends ConsumerState<ScheduleRegisterPage> {
                 const SizedBox(
                   height: 24,
                 ),
-                WeekDaysPanel(onDayPressed: (value) {
-                  scheduleRegisterVm.addOrRemoveOpenDay(value);
-                }),
+                WeekDaysPanel(
+                  onDayPressed: (value) {
+                    scheduleRegisterVm.addOrRemoveOpenDay(value);
+                  },
+                ),
                 const SizedBox(
                   height: 24,
                 ),

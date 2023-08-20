@@ -1,5 +1,6 @@
 import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:dw_schedule/src/core/ui/schedule_icons.dart';
+import 'package:dw_schedule/src/features/home/adm/home_employee_tile.dart';
 import 'package:dw_schedule/src/features/home/widget/home_header.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class HomeAdmPage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => const Text('x'),
+              (context, index) => const HomeEmployeeTile(),
               childCount: 20,
             ),
           )

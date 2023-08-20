@@ -65,7 +65,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
             case SplashState.loggedEmployee:
               _redirect('/home/employee');
             case _:
-              _redirect('/home/login');
+              _redirect('/auth/login');
           }
         },
       );
@@ -90,7 +90,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
             setState(() {
               endAnimation = true;
             });
-            _redirect('auth/login');
+            _redirect('/auth/login');
           },
           child: Center(
             child: AnimatedContainer(
