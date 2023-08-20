@@ -43,6 +43,18 @@ sealed class ScheduleTheme {
         ),
       ),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        side: const BorderSide(
+          color: ColorsConstants.lightBlue,
+          width: 1,
+        ),
+        foregroundColor: ColorsConstants.lightBlue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+    ),
     fontFamily: FontConstants.fontFamily,
   );
 }
