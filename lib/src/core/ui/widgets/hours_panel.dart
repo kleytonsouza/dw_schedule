@@ -2,12 +2,14 @@ import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:flutter/material.dart';
 
 class HoursPanel extends StatelessWidget {
+  final List<int>? enabledTimes;
   final int startTime;
   final int endTime;
   final ValueChanged<int> onHourPressed;
 
   const HoursPanel({
     super.key,
+    this.enabledTimes,
     required this.startTime,
     required this.endTime,
     required this.onHourPressed,
@@ -33,6 +35,7 @@ class HoursPanel extends StatelessWidget {
           children: [
             for (int i = startTime; i <= endTime; i++)
               TimeButton(
+                enabledTimes: enabledTimes,
                 onPressed: onHourPressed,
                 value: i,
                 label: '${i.toString().padLeft(2, '0')}:00',
@@ -45,12 +48,14 @@ class HoursPanel extends StatelessWidget {
 }
 
 class TimeButton extends StatefulWidget {
+  final List<int>? enabledTimes;
   final String label;
   final int value;
   final ValueChanged<int> onPressed;
 
   const TimeButton({
     required this.label,
+    this.enabledTimes,
     required this.value,
     required this.onPressed,
     super.key,
@@ -70,14 +75,26 @@ class _TimeButtonState extends State<TimeButton> {
     final buttonBorderColor =
         selected ? ColorsConstants.lightBlue : ColorsConstants.grey;
 
+    final TimeButton(:label, :value, :enabledTimes, :onPressed) = widget;
+
+    final disableTime = enabledTimes != null && !enabledTimes.contains(value);
+
+    if (disableTime) {
+      buttonColor = Colors.grey[400]!;
+    }
+
     return InkWell(
       borderRadius: BorderRadius.circular(8),
-      onTap: () {
-        setState(() {
-          selected = !selected;
-          widget.onPressed(widget.value);
-        });
-      },
+      onTap: disableTime
+          ? null
+          : () {
+              setState(
+                () {
+                  selected = !selected;
+                  onPressed(value);
+                },
+              );
+            },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -90,7 +107,7 @@ class _TimeButtonState extends State<TimeButton> {
         height: 36,
         child: Center(
             child: Text(
-          widget.label,
+          label,
           style: TextStyle(
               fontSize: 12, fontWeight: FontWeight.w500, color: textColor),
         )),

@@ -1,11 +1,12 @@
 import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:dw_schedule/src/core/ui/schedule_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:dw_schedule/src/model/user_model.dart';
 
 class HomeEmployeeTile extends StatelessWidget {
-  const HomeEmployeeTile({super.key});
+  const HomeEmployeeTile({super.key, required this.employee});
 
-  final imageNetwork = false;
+  final UserModel employee;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +26,9 @@ class HomeEmployeeTile extends StatelessWidget {
             height: 56,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: switch (imageNetwork) {
-                  true => const NetworkImage('url'),
-                  false => const AssetImage(ImageConstants.avatar),
+                image: switch (employee.avatar) {
+                  final avatar? => NetworkImage(avatar),
+                  _ => const AssetImage(ImageConstants.avatar),
                 } as ImageProvider,
               ),
             ),
@@ -40,9 +41,9 @@ class HomeEmployeeTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Nome e sobrenome',
-                  style: TextStyle(
+                Text(
+                  employee.name,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

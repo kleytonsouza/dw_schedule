@@ -2,8 +2,10 @@ import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:flutter/material.dart';
 
 class WeekDaysPanel extends StatelessWidget {
-  const WeekDaysPanel({super.key, required this.onDayPressed});
   final ValueChanged<String> onDayPressed;
+  final List<String>? enabledDay;
+
+  const WeekDaysPanel({super.key, required this.onDayPressed, this.enabledDay});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +29,40 @@ class WeekDaysPanel extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ButtonDay(label: "Seg", onDaySelected: onDayPressed,),
-                ButtonDay(label: "Ter", onDaySelected: onDayPressed,),
-                ButtonDay(label: "Qua", onDaySelected: onDayPressed,),
-                ButtonDay(label: "Qui", onDaySelected: onDayPressed,),
-                ButtonDay(label: "Sex", onDaySelected: onDayPressed,),
-                ButtonDay(label: "Sab", onDaySelected: onDayPressed,),
-                ButtonDay(label: "Dom", onDaySelected: onDayPressed,),
+                ButtonDay(
+                  label: "Seg",
+                  onDaySelected: onDayPressed,
+                  enabledDay: enabledDay,
+                ),
+                ButtonDay(
+                  label: "Ter",
+                  onDaySelected: onDayPressed,
+                  enabledDay: enabledDay,
+                ),
+                ButtonDay(
+                  label: "Qua",
+                  onDaySelected: onDayPressed,
+                  enabledDay: enabledDay,
+                ),
+                ButtonDay(
+                  label: "Qui",
+                  onDaySelected: onDayPressed,
+                  enabledDay: enabledDay,
+                ),
+                ButtonDay(
+                  label: "Sex",
+                  onDaySelected: onDayPressed,
+                  enabledDay: enabledDay,
+                ),
+                ButtonDay(
+                  label: "Sab",
+                  onDaySelected: onDayPressed,
+                  enabledDay: enabledDay,
+                ),
+                ButtonDay(
+                  label: "Dom",
+                  onDaySelected: onDayPressed,
+                ),
               ],
             ),
           )
@@ -46,10 +75,12 @@ class WeekDaysPanel extends StatelessWidget {
 class ButtonDay extends StatefulWidget {
   final String label;
   final ValueChanged<String> onDaySelected;
+  final List<String>? enabledDay;
 
   const ButtonDay({
     required this.label,
     required this.onDaySelected,
+    this.enabledDay,
     super.key,
   });
 
@@ -62,21 +93,30 @@ class _ButtonDayState extends State<ButtonDay> {
 
   @override
   Widget build(BuildContext context) {
-    
     final textColor = selected ? Colors.white : ColorsConstants.grey;
     var buttonColor = selected ? ColorsConstants.lightBlue : Colors.white;
     final buttonBorderColor =
         selected ? ColorsConstants.lightBlue : ColorsConstants.grey;
 
+    final ButtonDay(:enabledDay, :label) = widget;
+
+    final disableDay = enabledDay != null && !enabledDay.contains(label);
+
+    if (disableDay) {
+      buttonColor = Colors.grey[400]!;
+    }
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
-        onTap: () {
-          widget.onDaySelected(widget.label);
-          setState(() {
-            selected = !selected;
-          });
-        },
+        onTap: disableDay
+            ? null
+            : () {
+                widget.onDaySelected(label);
+                setState(() {
+                  selected = !selected;
+                });
+              },
         borderRadius: BorderRadius.circular(8),
         child: Container(
           width: 40,
@@ -90,7 +130,7 @@ class _ButtonDayState extends State<ButtonDay> {
           ),
           child: Center(
               child: Text(
-            widget.label,
+            label,
             style: TextStyle(
               fontSize: 12,
               color: textColor,
