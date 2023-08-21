@@ -23,6 +23,7 @@ class HomeAdmPage extends ConsumerWidget {
         backgroundColor: ColorsConstants.lightBlue,
         onPressed: () {
           Navigator.of(context).pushNamed('/employee/register');
+          ref.invalidate(homeAdmVmProvider);
         },
         child: const CircleAvatar(
           backgroundColor: Colors.white,

@@ -84,11 +84,67 @@ class UserRepositoryImpl implements UserRepository {
       return Success(employees);
     } on DioException catch (e, s) {
       log('Erro ao buscar colaboradores', error: e, stackTrace: s);
-      return Failure(RepositoryException(message: "Erro ao buscar colaboradores"));
+      return Failure(
+          RepositoryException(message: "Erro ao buscar colaboradores"));
     } on Exception catch (e, s) {
       log('Erro ao converter colaborador (invalid Json)',
           error: e, stackTrace: s);
-      return Failure(RepositoryException(message: "Erro ao buscar colaboradores"));
+      return Failure(
+          RepositoryException(message: "Erro ao buscar colaboradores"));
+    }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> registerAdmAsEmployee(
+      ({
+        List<String> workDays,
+        List<int> workHours,
+      }) userModel) async {
+    try {
+      final userModelResult = await me();
+
+      final int userId;
+
+      switch (userModelResult) {
+        case Success(value: UserModel(:var id)):
+          userId = id;
+        case Failure(:var exception):
+          return Failure(exception);
+      }
+
+      await restClient.auth.put('/users/$userId', data: {
+        'work_days': userModel.workDays,
+        'work_hours': userModel.workHours,
+      });
+
+      return Success(nil);
+    } on DioException catch (e, s) {
+      log('Erro ao inserir adminstrado como colaborador',
+          error: e, stackTrace: s);
+      return Failure(RepositoryException(
+          message: 'Erro ao inserir adminstrado como colaborador'));
+    }
+  }
+  
+  @override
+  Future<Either<RepositoryException, Nil>> registerEmployee(({String email, String name, String password, int scheduleId, List<String> workDays, List<int> workHours}) userModel) async {
+    try {
+      await restClient.auth.post('/users/', data: {
+        'name': userModel.name,
+        'email': userModel.email,
+        'password': userModel.password,
+        'schedule_id': userModel.scheduleId,
+        'profile': 'EMPLOYEE',
+        'work_days': userModel.workDays,
+        'work_hours': userModel.workHours,
+      });
+
+      return Success(nil);
+    } on DioException catch (e, s) {
+      log('Erro ao inserir adminstrado como colaborador',
+          error: e, stackTrace: s);
+      return Failure(RepositoryException(
+          message: 'Erro ao inserir adminstrado como colaborador'));
     }
   }
 }

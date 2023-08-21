@@ -1,10 +1,10 @@
-import 'dart:ui';
-
 import 'package:dw_schedule/src/core/fb/either.dart';
 import 'package:dw_schedule/src/core/restClient/rest_client.dart';
 import 'package:dw_schedule/src/core/ui/schedule_nav_global_key.dart';
 import 'package:dw_schedule/src/model/schedule_model.dart';
 import 'package:dw_schedule/src/model/user_model.dart';
+import 'package:dw_schedule/src/repositories/appointment/appointment_repository.dart';
+import 'package:dw_schedule/src/repositories/appointment/appointment_repository_impl.dart';
 import 'package:dw_schedule/src/repositories/schedule/schedule_repository.dart';
 import 'package:dw_schedule/src/repositories/schedule/schedule_repository_impl.dart';
 import 'package:dw_schedule/src/repositories/user/user_repository.dart';
@@ -65,3 +65,8 @@ Future<void> logout(LogoutRef ref) async {
   Navigator.of(ScheduleNavGlobalKey.instance.navKey.currentContext!)
       .pushNamedAndRemoveUntil('/auth/login', (route) => false);
 }
+
+
+@riverpod
+AppointmentRepository appointmentRepository(AppointmentRepositoryRef ref) =>
+    AppointmentRepositoryImpl(restClient: ref.read(restClientProvider));
