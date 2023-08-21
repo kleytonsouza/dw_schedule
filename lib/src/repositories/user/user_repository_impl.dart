@@ -66,7 +66,29 @@ class UserRepositoryImpl implements UserRepository {
       return Success(nil);
     } on Exception catch (e, s) {
       log('Erro ao registrar usuário admin', error: e, stackTrace: s);
-      return Failure(RepositoryException(message: 'Erro ao registrar usuário admin'));
+      return Failure(
+          RepositoryException(message: 'Erro ao registrar usuário admin'));
+    }
+  }
+
+  @override
+  Future<Either<RepositoryException, List<UserModel>>> getEmployees(
+      int scheduleId) async {
+    try {
+      final Response(:List data) =
+          await restClient.auth.get('/users', queryParameters: {
+        'schedule_id': scheduleId,
+      });
+
+      final employees = data.map((e) => UserModelEmployee.fromMap(e)).toList();
+      return Success(employees);
+    } on DioException catch (e, s) {
+      log('Erro ao buscar colaboradores', error: e, stackTrace: s);
+      return Failure(RepositoryException(message: "Erro ao buscar colaboradores"));
+    } on Exception catch (e, s) {
+      log('Erro ao converter colaborador (invalid Json)',
+          error: e, stackTrace: s);
+      return Failure(RepositoryException(message: "Erro ao buscar colaboradores"));
     }
   }
 }

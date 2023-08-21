@@ -9,11 +9,13 @@ abstract interface class UserRepository {
 
   Future<Either<RepositoryException, UserModel>> me();
 
-   Future<Either<RepositoryException, Nil>> registerAdmin(
+  Future<Either<RepositoryException, Nil>> registerAdmin(
       ({
         String name,
         String email,
         String password,
       }) userData);
- 
+
+  Future<Either<RepositoryException, List<UserModel>>> getEmployees(
+      int scheduleId);
 }
