@@ -6,6 +6,7 @@ import 'package:dw_schedule/src/features/appointment/appointment_page.dart';
 import 'package:dw_schedule/src/features/auth/login/login_page.dart';
 import 'package:dw_schedule/src/features/auth/register/schedule/schedule_register_page.dart';
 import 'package:dw_schedule/src/features/auth/register/user/user_register_page.dart';
+import 'package:dw_schedule/src/features/employee/appointment/employee_appointment_page.dart';
 import 'package:dw_schedule/src/features/employee/register/employee_register_page.dart';
 import 'package:dw_schedule/src/features/home/adm/home_adm_page.dart';
 import 'package:dw_schedule/src/features/splash/splash_page.dart';
@@ -31,7 +32,8 @@ class ScheduleApp extends StatelessWidget {
             '/home/register/schedule': (_) => const ScheduleRegisterPage(),
             '/home/adm': (_) => const HomeAdmPage(),
             '/home/employee': (_) => const Text('Employee'),
-            '/home/register': (_) => const EmployeeRegisterPage(),
+            '/employee/register': (_) => const EmployeeRegisterPage(),
+            '/employee/appointment': (_) => const EmployeeAppointmentPage(),
             '/appointment': (_) => const AppointmentPage(),
           },
         );
