@@ -69,7 +69,7 @@ class _EmployeeAppointmentPageState
                   todayHighlightColor: ColorsConstants.lightBlue,
                   showDatePickerButton: true,
                   showTodayButton: true,
-                  dataSource: AppointmentDs(),
+                  dataSource: AppointmentDs(aappointments: appointments),
                   onTap: (calendarTapDetails) {
                     if (calendarTapDetails.appointments != null &&
                         calendarTapDetails.appointments!.isNotEmpty) {

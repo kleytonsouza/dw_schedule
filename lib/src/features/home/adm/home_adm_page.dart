@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dw_schedule/src/core/providers/application_providers.dart';
 import 'package:dw_schedule/src/core/ui/constants.dart';
 import 'package:dw_schedule/src/core/ui/schedule_icons.dart';
 import 'package:dw_schedule/src/core/ui/widgets/schedule_loader.dart';
@@ -23,6 +24,7 @@ class HomeAdmPage extends ConsumerWidget {
         backgroundColor: ColorsConstants.lightBlue,
         onPressed: () {
           Navigator.of(context).pushNamed('/employee/register');
+          ref.invalidate(getMeProvider);
           ref.invalidate(homeAdmVmProvider);
         },
         child: const CircleAvatar(
